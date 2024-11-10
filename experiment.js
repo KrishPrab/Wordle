@@ -1,6 +1,7 @@
 const wordEndIndex = [4, 9, 14, 19, 24];
-let myWord = ""; 
-let Word = ""; 
+let myWord = "";  // String to store the user's input progressively
+let Word = "";  // The actual word of the day (to be fetched)
+let isWordCompleted = false;  // Flag to track if the word has been completed
 
 const inputs = Array.from(document.querySelectorAll(".Letterspace"));
 const WordOfTheDay = "https://random-word-api.herokuapp.com/word?length=5";
@@ -9,9 +10,9 @@ async function GetWord() {
   try {
     const response = await fetch(WordOfTheDay);
     const data = await response.json();
-    Word = data[0].toUpperCase(); 
+    Word = data[0].toUpperCase();  // Make sure the word is in uppercase for uniformity
     console.log("Word of the Day:", Word); 
-    setupInputListeners(); 
+    setupInputListeners();  // Set up event listeners after fetching the word
   } catch (error) {
     console.error("Error fetching the word:", error);
   }
@@ -20,33 +21,38 @@ async function GetWord() {
 function setupInputListeners() {
   inputs.forEach((input) => {
     input.addEventListener("keyup", (event) => {
+      if (isWordCompleted) {
+        // Prevent any input or Backspace if the word is already completed
+        event.preventDefault();
+        return;
+      }
+
       const currInput = event.target;
       const currInputIndex = inputs.indexOf(currInput);
-
+      
       if (isLetter(event.key)) {
-        myWord += currInput.value.toUpperCase(); 
+        myWord += currInput.value.toUpperCase();  // Append input to the word
         
         if (wordEndIndex.includes(currInputIndex)) {
-          colorCodeInputs(currInputIndex - 4, currInputIndex); 
+          colorCodeInputs(currInputIndex - 4, currInputIndex);  // Color-code based on input indices
+          
           if (myWord === Word) {
-              alert("Correct Word!");
-              disableInputs(); 
-         
-            } else if (currInputIndex === 24){
-              alert("You Lost :(");
-            } else {
+            alert("Correct Word!");
+            disableInputs();  // Disable inputs when the word is correct
+            isWordCompleted = true;  // Mark word as completed
+          } else {
             alert("Incorrect Word");
-            focusNext();
+            focusNext();  // Move focus to the next input
           }
-          myWord = ""; 
+          myWord = "";  // Reset myWord for the next try
         } else {
-          focusNext();
+          focusNext();  // Focus on the next input if we haven't reached the end of the word
         }
       } else if (event.key === "Backspace") {
-        myWord = myWord.slice(0, -1); 
-        focusBack();
+        myWord = myWord.slice(0, -1);  // Remove the last character from the input string
+        focusBack();  // Focus on the previous input
       } else {
-        event.preventDefault();
+        event.preventDefault();  // Prevent invalid keys
       }
     });
   });
@@ -54,7 +60,10 @@ function setupInputListeners() {
 
 // Function to color-code the current word section
 function colorCodeInputs(startIndex, endIndex) {
-  myWord.split("").forEach((letter, i) => {
+  const currentWordSection = myWord.split("");  // Split the input word into letters
+
+  // Iterate over the letters of the input word and color code
+  currentWordSection.forEach((letter, i) => {
     const input = inputs[startIndex + i];
     if (Word[i] === letter) {
       // Correct position
@@ -64,7 +73,7 @@ function colorCodeInputs(startIndex, endIndex) {
       input.style.backgroundColor = "yellow";
     } else {
       // Letter not in word
-      input.style.backgroundColor = "light gray";
+      input.style.backgroundColor = "lightgray";
     }
   });
 }
@@ -82,16 +91,18 @@ function focusBack() {
   const currInput = document.activeElement;
   const currInputIndex = inputs.indexOf(currInput);
   const lastInputIndex = (currInputIndex - 1 + inputs.length) % inputs.length;
-  inputs[lastInputIndex].value = ""; // Clear previous input
-  inputs[lastInputIndex].focus();
+  inputs[lastInputIndex].value = "";  // Clear the value of the previous input
+  inputs[lastInputIndex].focus();  // Focus back on the last input
 }
 
 // Clear all inputs for a new attempt
 function clearInputs() {
   inputs.forEach(input => {
     input.value = "";
-    input.style.backgroundColor = ""; // Reset background color
+    input.style.backgroundColor = "";  // Reset background color
   });
+  myWord = "";  // Reset the user's input
+  isWordCompleted = false;  // Reset the completion flag
 }
 
 // Disable all inputs after a correct guess
