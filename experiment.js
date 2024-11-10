@@ -35,7 +35,7 @@ function setupInputListeners() {
         
         if (wordEndIndex.includes(currInputIndex)) {
           colorCodeInputs(currInputIndex - 4, currInputIndex);  // Color-code based on input indices
-          
+          // hi
           if (myWord === Word) {
             alert("Correct Word!");
             disableInputs();  // Disable inputs when the word is correct
