@@ -1,88 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  
-  <style>
-    
-    .titlebox{
-        display: flex;
-        justify-content: center;
-       
-    }
-
-    .flex-container {
-        display: flex;
-        background-color: #efefef;
-    }
-
-    .wordspace {
-        width: 100%;         
-        background-color: #ffffff;
-    }
-
-    .Letterspace {
-        width: 100px;
-        height: 100px;
-        font-size: 2rem;
-
-        /* margin: 25%;
-        padding: 25%; */
-        text-align: center;
-        border-color: rgb(129, 128, 128);
-        border-radius: 25px;
-        border-width: 5px;
-        border-style: dashed;
-
-    }
-
-  </style>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
-    rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
     />
+    <style>
+      .flex-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .Grid-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px; /* Add space between cells */
+        margin-bottom: 15px; /* Space between rows */
+      }
+
+      .Letterspace {
+        width: 100px;
+        height: 100px;
+        font-size: clamp(1.5rem, 2vw, 2rem);
+        caret-color: transparent;
+        text-align: center;
+        border: 2px dashed rgb(129, 128, 128);
+        border-radius: 8px;
+      }
+    </style>
   </head>
   <body>
-    <div class="titlebox">
-        <img style="margin:0 10px; width: 50%; height:auto"src="Wordlelogo.jpg" alt="Wordlelogo logo"/>
-    </div>   
     <div class="flex-container">
-        <div class="wordspace">
-            <input type="text" class="Letterspace" maxlength="1"></input>
-            <div class="Letterspace">2</div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-        </div>
-        <div class="wordspace">
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-        </div>        
-        <div class="wordspace">
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-        </div>
-        <div class="wordspace">
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-        </div>  
-        <div class="wordspace">
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-            <div class="Letterspace"></div>
-        </div>
-    </div>    
+      <div class="flex-container">
+        <img
+          style="margin: 0 10px; width: 50%; height: auto"
+          src="Wordlelogo.jpg"
+          alt="Wordle logo"
+        />
+      </div>
+
+      <!-- Rows for Wordle Grid -->
+      <div class="Grid-container">
+        <input type="text" maxlength="1" name="W1L1" class="Letterspace" />
+        <input type="text" maxlength="1" name="W1L2" class="Letterspace" />
+        <input type="text" maxlength="1" name="W1L3" class="Letterspace" />
+        <input type="text" maxlength="1" name="W1L4" class="Letterspace" />
+        <input type="text" maxlength="1" name="W1L5" class="Letterspace" />
+      </div>
+
+      <div class="Grid-container">
+        <input type="text" maxlength="1" name="W2L1" class="Letterspace" />
+        <input type="text" maxlength="1" name="W2L2" class="Letterspace" />
+        <input type="text" maxlength="1" name="W2L3" class="Letterspace" />
+        <input type="text" maxlength="1" name="W2L4" class="Letterspace" />
+        <input type="text" maxlength="1" name="W2L5" class="Letterspace" />
+      </div>
+
+      <div class="Grid-container">
+        <input type="text" maxlength="1" name="W3L1" class="Letterspace" />
+        <input type="text" maxlength="1" name="W3L2" class="Letterspace" />
+        <input type="text" maxlength="1" name="W3L3" class="Letterspace" />
+        <input type="text" maxlength="1" name="W3L4" class="Letterspace" />
+        <input type="text" maxlength="1" name="W3L5" class="Letterspace" />
+      </div>
+
+      <div class="Grid-container">
+        <input type="text" maxlength="1" name="W4L1" class="Letterspace" />
+        <input type="text" maxlength="1" name="W4L2" class="Letterspace" />
+        <input type="text" maxlength="1" name="W4L3" class="Letterspace" />
+        <input type="text" maxlength="1" name="W4L4" class="Letterspace" />
+        <input type="text" maxlength="1" name="W4L5" class="Letterspace" />
+      </div>
+
+      <div class="Grid-container">
+        <input type="text" maxlength="1" name="W5L1" class="Letterspace" />
+        <input type="text" maxlength="1" name="W5L2" class="Letterspace" />
+        <input type="text" maxlength="1" name="W5L3" class="Letterspace" />
+        <input type="text" maxlength="1" name="W5L4" class="Letterspace" />
+        <input type="text" maxlength="1" name="W5L5" class="Letterspace" />
+      </div>
+    </div>
+
+    <script src="experiment.js"></script>
   </body>
 </html>
